@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { CryotoState } from "../CryptoContext";
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles(() => ({
 
 const Header = () => {
   const navigate = useNavigate();
+  const {} = CryotoState()
   const darkTheme = createTheme({
     palette: {
       primary: {
