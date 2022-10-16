@@ -26,7 +26,8 @@ const useStyles = makeStyles(() => ({
 
 const Header = () => {
   const navigate = useNavigate();
-  const {} = CryotoState()
+  const {currency,setCurrency} = CryotoState()
+  console.log(currency)
   const darkTheme = createTheme({
     palette: {
       primary: {
@@ -51,6 +52,10 @@ const Header = () => {
                 Crypto Hunter
               </Typography>
               <Select
+              value={currency}
+              onChange={(e) => {
+                setCurrency(e.target.value)
+              }}
                 variant="outlined"
                 style={{
                   width: 100,
