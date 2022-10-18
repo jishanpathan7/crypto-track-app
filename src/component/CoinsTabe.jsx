@@ -47,26 +47,18 @@ const useStyles = makeStyles(() => ({
     },
   }))
 const CoinsTabe = () => {
-  const [coins, setCoins] = useState([]);
-  const [loading, setLoading] = useState(false);
+
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   
-  const { currency, symbol } = CryotoState();
+  const { currency, symbol, coins,loading,fetchCoins } = CryotoState();
 
   const navigate = useNavigate();
   
   
   const classes = useStyles();
 
-  const fetchCoins = async () => {
-    setLoading(true);
-    const { data } = await axios.get(CoinList(currency));
   
-
-    setCoins(data);
-    setLoading(false);
-  };
 
   useEffect(() => {
     fetchCoins();
