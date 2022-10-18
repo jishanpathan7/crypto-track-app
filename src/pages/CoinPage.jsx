@@ -12,7 +12,7 @@ const CoinPage = () => {
   const { id } = useParams();
   const [coin, setCoin] = useState();
 
-  const { currency, symbol } = CryotoState();
+  const { currency, symbol,user } = CryotoState();
 
   const fetchCoin = async () => {
     const { data } = await axios.get(SingleCoin(id));
@@ -148,6 +148,7 @@ const CoinPage = () => {
               M
             </Typography>
           </span>
+        
         </div>
       </div>
     <CoinInfo coin={coin} />

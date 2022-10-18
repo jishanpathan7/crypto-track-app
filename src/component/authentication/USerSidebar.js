@@ -5,6 +5,8 @@ import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
 import { CryotoState } from "../../CryptoContext";
 import { Avatar } from "@material-ui/core";
+import { auth } from "../../firebase";
+import { signOut } from "firebase/auth";
 
 const useStyles = makeStyles({
   container: {
@@ -30,10 +32,29 @@ const useStyles = makeStyles({
     backgroundColor: "#EEBC1D",
     objectFit: "contain",
   },
+  logout: {
+    height: "8%",
+    width: "100%",
+    backgroundColor: "#EEBC1D",
+    marginTop: 20,
+  },
+  watchlist: {
+    flex: 1,
+    width: "100%",
+    backgroundColor: "grey",
+    borderRadius: 10,
+    padding: 15,
+    paddingTop: 10,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 12,
+    overflowY: "scroll",
+  },
 });
 
 export default function USerSidebar() {
-  const { user } = CryotoState();
+  const { user,setAlert } = CryotoState();
   const classes = useStyles();
   const [state, setState] = React.useState({
     right: false,
@@ -48,6 +69,16 @@ export default function USerSidebar() {
     }
 
     setState({ ...state, [anchor]: open });
+  };
+  const logOut = () => {
+    signOut(auth);
+    setAlert({
+      open: true,
+      type: "success",
+      message: "Logout Successfull !",
+    });
+
+    toggleDrawer();
   };
 
   return (
@@ -89,7 +120,19 @@ export default function USerSidebar() {
                 >
                   {user.displayName || user.email}
                 </span>
+                <div className={classes.watchlist}>
+                <span style={{ fontSize: 15, textShadow: "0 0 5px black" }}>
+                    Watchlist
+                  </span>
+                </div>
               </div>
+              <Button
+                variant="contained"
+                className={classes.logout}
+                onClick={logOut}
+              >
+                Log Out
+              </Button>
             </div>
           </Drawer>
         </React.Fragment>
