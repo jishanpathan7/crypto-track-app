@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Chart } from "react-chartjs-2";
+
 import { Line } from "react-chartjs-2";
 import "chart.js/auto"; // ADD THIS
 import {

@@ -206,7 +206,7 @@ const CoinPage = () => {
               M
             </Typography>
           </span>
-          {user && (
+          {user ? (
             <Button
               variant="outlined"
               style={{
@@ -221,6 +221,17 @@ const CoinPage = () => {
            {
             inwatchList ? "Remove from watchlist": "Add to Watchlist"
            }
+            </Button>
+          ) : (
+            <Button   variant="outlined"
+            style={{
+              width: "100%",
+              fontWeight: "bold",
+              height: 40,
+              backgroundColor: inwatchList? "#ff0000":"#FFFFFF",
+              color: inwatchList? "#ffffff" : "#000000"
+            }}>
+            Login to Add  Coin into Wishlist
             </Button>
           )}
         </div>
