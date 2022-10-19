@@ -82,6 +82,9 @@ const CoinsTabe = () => {
         coin.symbol.toLowerCase().includes(search)
     );
   };
+  // if(Math.random() > 0.5) {
+  //   return new Error("Test Error Boundary")
+  // }
 
   return (
     <>
