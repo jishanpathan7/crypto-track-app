@@ -1,4 +1,4 @@
-## To see the code change the Branch from main to crypto-ui
+## To see the code, change the Branch from main to crypto-ui
 
 # Cryptocurrency Tracker with React JS, Material UI and Chart JS
 
