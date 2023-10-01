@@ -1,8 +1,12 @@
+//* Packages  Imports */
 import { Box, Button, TextField } from "@material-ui/core";
 import React, { useState } from "react";
+
+//* Utils Imports */
 import { CryotoState } from "../../CryptoContext";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+
 const Signup = ({ handleClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

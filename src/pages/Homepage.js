@@ -1,9 +1,14 @@
-import React, { Suspense } from 'react'
+//* Packages Imports */
+import { Suspense,lazy } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
+
+//* Components Imports */
 import Banner from '../component/Banner/Banner'
 import ErrorFallback from '../component/ErrorBoundary'
 
-const CoinsTabe = React.lazy(() => import("../component/CoinsTabe"))
+//* Lazy Imports */
+const CoinsTabe = lazy(() => import("../component/CoinsTabe"))
+
 const Homepage = () => {
   return (
     <>

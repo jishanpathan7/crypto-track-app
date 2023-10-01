@@ -1,5 +1,8 @@
+//* Packages Imports */
 import { Container, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
+
+//* Components Imports */
 import Carousal from './Carousal'
 
 
@@ -22,8 +25,10 @@ const useStyles = makeStyles(() => ({
           textAlign: "center"
     }
 }))
+
 const Banner = () => {
     const classes = useStyles()
+    
   return (
     <div className={classes.banner}>
         <Container className={classes.bannerContent}>

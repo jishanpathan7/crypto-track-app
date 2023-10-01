@@ -1,12 +1,16 @@
+//* Styles Imports */
 import "./App.css";
+
+//* Packages Imports */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./component/Header";
-// import Homepage from "./pages/Homepage";
-// import CoinPage from "./pages/CoinPage";
 import { makeStyles } from "@material-ui/core/styles";
-import Alert from "./component/Banner/Alert"
 import React, {lazy, Suspense} from "react";
 
+//* Component Imports */
+import Alert from "./component/Banner/Alert"
+import Header from "./component/Header";
+
+//* Lazy Imports */
 const Homepage = lazy(() => import("./pages/Homepage"));
 const CoinPage = lazy(() => import("./pages/CoinPage"));
 

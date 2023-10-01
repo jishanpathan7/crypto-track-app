@@ -1,20 +1,23 @@
+//* Packages Imports */
 import axios from "axios";
 import { useEffect, useState } from "react";
-
 import { Line } from "react-chartjs-2";
-import "chart.js/auto"; // ADD THIS
+import "chart.js/auto";
 import {
   CircularProgress,
   createTheme,
- 
   ThemeProvider,
 } from "@material-ui/core";
 import { makeStyles} from "@material-ui/core"
+
+//* Components Imports */
 import SelectButton from "./SelectButton";
 
+//* Utils Imports 
 import { CryotoState } from "../CryptoContext";
 import { HistoricalChart } from "../config/api";
 import { chartDays } from "../config/Data";
+
 const useStyles = makeStyles((theme) => ({
   container: {
     width: "75%",

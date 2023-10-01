@@ -1,9 +1,13 @@
+//* Packages Imports */
 import axios from "axios";
+import React, { createContext, useContext, useEffect, useState } from "react";
+
+//* Utils Imports */
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
-import React, { createContext, useContext, useEffect, useState } from "react";
 import { CoinList } from "./config/api";
 import { auth,db } from "./firebase";
+
 const Crypto = createContext();
 
 const CryptoContext = ({ children }) => {

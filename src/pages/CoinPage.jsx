@@ -1,3 +1,4 @@
+//* Packages Imports */
 import {
   Button,
   LinearProgress,
@@ -6,24 +7,83 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
-import { SingleCoin } from "../config/api";
-import { CryotoState } from "../CryptoContext";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
+//* Component Import */
 import CoinInfo from "../component/CoinInfo";
 import { numberWithCommas } from "../component/CoinsTabe";
+
+//* Utils Imports */
+import { SingleCoin } from "../config/api";
+import { CryotoState } from "../CryptoContext";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+      alignItems: "center",
+    },
+  },
+  arrowIcon: {
+    padding: "15px",
+  },
+  sidebar: {
+    width: "30%",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: 25,
+    borderRight: "2px solid grey",
+  },
+  heading: {
+    fontWeight: "bold",
+    marginBottom: 20,
+    fontFamily: "Poppins",
+  },
+  description: {
+    width: "100%",
+    fontFamily: "Poppins",
+    padding: 25,
+    paddingBottom: 15,
+    paddingTop: 0,
+    textAlign: "justify",
+  },
+  marketData: {
+    alignSelf: "start",
+    padding: 25,
+    paddingTop: 10,
+    width: "100%",
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      justifyContent: "space-around",
+    },
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    [theme.breakpoints.down("xs")]: {
+      alignItems: "start",
+    },
+  },
+}));
+
 const CoinPage = () => {
+  const classes = useStyles();
   const { id } = useParams();
   const [coin, setCoin] = useState();
-
-  const { currency, symbol, user, watchlist,setAlert } = CryotoState();
+  const navigate = useNavigate();
+  const { currency, symbol, user, watchlist, setAlert } = CryotoState();
 
   const fetchCoin = async () => {
     const { data } = await axios.get(SingleCoin(id));
-
     setCoin(data);
   };
 
@@ -32,59 +92,7 @@ const CoinPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const useStyles = makeStyles((theme) => ({
-    container: {
-      display: "flex",
-      [theme.breakpoints.down("md")]: {
-        flexDirection: "column",
-        alignItems: "center",
-      },
-    },
-    sidebar: {
-      width: "30%",
-      [theme.breakpoints.down("md")]: {
-        width: "100%",
-      },
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      marginTop: 25,
-      borderRight: "2px solid grey",
-    },
-    heading: {
-      fontWeight: "bold",
-      marginBottom: 20,
-      fontFamily: "Poppins",
-    },
-    description: {
-      width: "100%",
-      fontFamily: "Poppins",
-      padding: 25,
-      paddingBottom: 15,
-      paddingTop: 0,
-      textAlign: "justify",
-    },
-    marketData: {
-      alignSelf: "start",
-      padding: 25,
-      paddingTop: 10,
-      width: "100%",
-      [theme.breakpoints.down("md")]: {
-        display: "flex",
-        justifyContent: "space-around",
-      },
-      [theme.breakpoints.down("sm")]: {
-        flexDirection: "column",
-        alignItems: "center",
-      },
-      [theme.breakpoints.down("xs")]: {
-        alignItems: "start",
-      },
-    },
-  }));
-  
 
-  
   const addToWatchlist = async () => {
     const coinRef = doc(db, "watchlist", user.uid);
     try {
@@ -112,11 +120,10 @@ const CoinPage = () => {
     try {
       await setDoc(
         coinRef,
-        { coins: watchlist.filter(watch => watch !== coin?.id) },
+        { coins: watchlist.filter((watch) => watch !== coin?.id) },
         {
           merge: true,
         }
-       
       );
 
       setAlert({
@@ -131,15 +138,23 @@ const CoinPage = () => {
         type: "error",
       });
     }
-  }
+  };
 
-  const classes = useStyles();
-  const inwatchList =  watchlist.includes(coin?.id)
+  const inwatchList = watchlist.includes(coin?.id);
 
   if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }} />;
 
   return (
     <div className={classes.container}>
+      <span className={classes.arrowIcon}>
+        <ArrowBackIcon
+          style={{
+            color: "gold",
+            cursor: "pointer",
+          }}
+          onClick={() => navigate("/")}
+        />
+      </span>
       <div className={classes.sidebar}>
         <img
           src={coin?.image.large}
@@ -213,25 +228,25 @@ const CoinPage = () => {
                 width: "100%",
                 fontWeight: "bold",
                 height: 40,
-                backgroundColor: inwatchList? "#ff0000":"#FFFFFF",
-                color: inwatchList? "#ffffff" : "#000000"
+                backgroundColor: inwatchList ? "#ff0000" : "#FFFFFF",
+                color: inwatchList ? "#ffffff" : "#000000",
               }}
-              onClick= {inwatchList? removefromWatchList:   addToWatchlist}
+              onClick={inwatchList ? removefromWatchList : addToWatchlist}
             >
-           {
-            inwatchList ? "Remove from watchlist": "Add to Watchlist"
-           }
+              {inwatchList ? "Remove from watchlist" : "Add to Watchlist"}
             </Button>
           ) : (
-            <Button   variant="outlined"
-            style={{
-              width: "100%",
-              fontWeight: "bold",
-              height: 40,
-              backgroundColor: inwatchList? "#ff0000":"#FFFFFF",
-              color: inwatchList? "#ffffff" : "#000000"
-            }}>
-            Login to Add  Coin into Wishlist
+            <Button
+              variant="outlined"
+              style={{
+                width: "100%",
+                fontWeight: "bold",
+                height: 40,
+                backgroundColor: inwatchList ? "#ff0000" : "#FFFFFF",
+                color: inwatchList ? "#ffffff" : "#000000",
+              }}
+            >
+              Login to Add Coin into Wishlist
             </Button>
           )}
         </div>

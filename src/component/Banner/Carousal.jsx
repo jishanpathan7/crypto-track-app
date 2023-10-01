@@ -1,10 +1,15 @@
+//* Packages Import */
 import { makeStyles } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import { Link } from "react-router-dom";
+
+//* Component Import */
 import { TrendingCoins } from "../../config/api";
 import { CryotoState } from "../../CryptoContext";
+
+
 
 const useStyles = makeStyles((theme) => ({
   carousal: {
@@ -39,8 +44,7 @@ const Carousal = () => {
   };
 
 
-  useEffect(() => {
-    
+  useEffect(() => {   
     fetchTrendingCoins();
   }, [currency]);
 

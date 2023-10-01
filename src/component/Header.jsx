@@ -1,3 +1,4 @@
+//* Packages Imports */
 import {
   AppBar,
   Container,
@@ -11,9 +12,14 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { CryotoState } from "../CryptoContext";
+
+
+//* Components Imports */
 import AuthModal from "./authentication/AuthModal";
 import USerSidebar from "./authentication/USerSidebar";
+
+//* Utils Imports */
+import { CryotoState } from "../CryptoContext";
 
 const useStyles = makeStyles(() => ({
   title: {

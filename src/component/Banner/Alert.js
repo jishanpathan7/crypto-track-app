@@ -1,6 +1,9 @@
+//* Packages Imports */
 import { Snackbar } from "@material-ui/core";
 import React from "react";
 import MuiAlert from "@material-ui/lab/Alert";
+
+//* Utils Imports */
 import { CryotoState } from "../../CryptoContext";
 
 const Alert = () => {
